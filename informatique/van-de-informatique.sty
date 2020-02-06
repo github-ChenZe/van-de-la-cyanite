@@ -1,0 +1,203 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{van-de-informatique}
+
+\newcommand{\eip}{\snp{\%eip}}
+\newcommand{\Reax}{{\color{red}{\snp{\%eax}}}}
+\newcommand{\Recx}{{\color{red}{\snp{\%ecx}}}}
+\newcommand{\Redx}{{\color{red}{\snp{\%edx}}}}
+\newcommand{\Rebx}{{\color{green}{\snp{\%ebx}}}}
+\newcommand{\Resi}{{\color{green}{\snp{\%esi}}}}
+\newcommand{\Redi}{{\color{green}{\snp{\%edi}}}}
+\newcommand{\Resp}{{\color{blue}{\snp{\%esp}}}}
+\newcommand{\Rebp}{{\color{blue}{\snp{\%ebp}}}}
+
+\newcommand{\Rax}{\snp{\%ax}}
+\newcommand{\Rcx}{\snp{\%cx}}
+\newcommand{\Rdx}{\snp{\%dx}}
+\newcommand{\Rbx}{\snp{\%bx}}
+\newcommand{\Rsi}{\snp{\%si}}
+\newcommand{\Rdi}{\snp{\%di}}
+\newcommand{\Rsp}{\snp{\%sp}}
+\newcommand{\Rbp}{\snp{\%bp}}
+
+\newcommand{\Rah}{\snp{\%ah}}
+\newcommand{\Rch}{\snp{\%ch}}
+\newcommand{\Rdh}{\snp{\%dh}}
+\newcommand{\Rbh}{\snp{\%bh}}
+
+\newcommand{\Ral}{\snp{\%al}}
+\newcommand{\Rcl}{\snp{\%cl}}
+\newcommand{\Rdl}{\snp{\%dl}}
+\newcommand{\Rbl}{\snp{\%bl}}
+
+\RequirePackage{fontspec}
+\setmonofont{Consolas}
+
+\definecolor{stringred}{rgb}{0.488, 0.152, 0.152}
+
+\lstdefinelanguage{javascript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{stringred}\ttfamily,
+  morestring=[b]',
+  morestring=[b]",
+  moredelim=[is][stringstyle]{@<}{>@}
+}
+
+\lstset{
+  backgroundcolor=\color{gray!20!white},
+  aboveskip=1em,
+  belowskip=1em,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{stringred}\ttfamily,
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4,
+}
+
+\lstdefinestyle{fancylst}{
+     language=Java,
+     tabsize=1,
+     keywordstyle=\color{blue},
+     showstringspaces=false,
+     morekeywords={public, class}
+}
+
+\lstdefinestyle{csfancylst}{
+     language=[Sharp]C,
+     tabsize=1,
+     keywordstyle=\color{blue},
+     showstringspaces=false,
+     morekeywords={public, class}
+}
+
+\def\van@declare@lang@abbr#1#2#3#4{%
+  \expandafter\gdef\csname van@lang@abbr@#1 \endcsname{#2}
+  \lstdefinestyle{#1 fancylst}{
+     language=#2,
+     tabsize=1,
+     keywordstyle=\color{blue},
+     showstringspaces=false,
+     morekeywords={public, class}
+  }
+  \newtcblisting{#1lst}{
+      enhanced,
+      breakable,
+      arc=1mm,
+      top=0mm,
+      bottom=0mm,
+      left=2mm,
+      right=2mm,
+      boxrule=0pt,frame hidden,
+      colback=gray!20!white,
+      listing only,
+      listing options={style=#1 fancylst, escapeinside={/@}{@/}},
+      title=\smash{\raisebox{-.3em}{\includegraphics[height=1em]{informatique/langicon/#4}}}\hspace{.2em}{\ttfamily #3}, attach boxed title to top left,
+      sharp corners=northwest,
+      boxed title style={size=small,colback=gray,colframe=gray},
+      boxed title size=copy,
+      before upper={\vspace{-1em}},
+      after upper={\vspace{-.5em}}
+  }
+}
+\van@declare@lang@abbr{js}{javascript}{JavaScript}{javascript.png}
+\van@declare@lang@abbr{java}{java}{Java}{java.png}
+\van@declare@lang@abbr{py}{python}{Python}{python.png}
+\van@declare@lang@abbr{csh}{[Sharp]C}{C$^\sharp$}{CSharp.png}
+\van@declare@lang@abbr{nodejs}{javascript}{Node.js}{nodejs.png}
+\van@declare@lang@abbr{cpp}{C++}{C++}{cpp.png}
+\van@declare@lang@abbr{c}{C}{C}{c.png}
+\van@declare@lang@abbr{php}{php}{php}{php.png}
+\van@declare@lang@abbr{sh}{bash}{bash}{shell.png}
+\van@declare@lang@abbr{matlab}{matlab}{matlab}{matlab.png}
+
+\def\pyheader{\ttfamily\smash{\raisebox{-.3em}{\includegraphics[height=1em]{informatique/langicon/python.png}}Python}}
+\def\javaheader{\ttfamily\smash{\raisebox{-.3em}{\includegraphics[height=1em]{informatique/langicon/java.png}}Java}}
+\def\jsheader{\ttfamily\smash{\raisebox{-.3em}{\includegraphics[height=1em]{informatique/langicon/javascript.png}}JavaScript}}
+\def\cshheader{\ttfamily\smash{\raisebox{-.3em}{\includegraphics[height=1em]{informatique/langicon/CSharp.png}}C$^\sharp$}}
+\def\nodejsheader{\ttfamily\smash{\raisebox{-.3em}{\includegraphics[height=1em]{informatique/langicon/nodejs.png}}Node.js}}
+\def\cppheader{\ttfamily\smash{\raisebox{-.3em}{\includegraphics[height=1em]{informatique/langicon/cpp.png}}C++}}
+\def\cheader{\ttfamily\smash{\raisebox{-.3em}{\includegraphics[height=1em]{informatique/langicon/c.png}}C}}
+\def\phpheader{\ttfamily\smash{\raisebox{-.3em}{\includegraphics[height=1em]{informatique/langicon/php.png}}PHP}}
+\def\shheader{\ttfamily\smash{\raisebox{-.3em}{\includegraphics[height=1em]{informatique/langicon/shell.png}}bash}}
+\def\shheader{\ttfamily\smash{\raisebox{-.3em}{\includegraphics[height=1em]{informatique/langicon/matlab.png}}matlab}}
+
+\def\pyname{\ttfamily Python}
+\def\javaname{\ttfamily Java}
+\def\jsname{\ttfamily \-Java\-Script}
+\def\cshname{\ttfamily C$^\sharp$}
+\def\nodejsname{\ttfamily Node.js}
+\def\cppname{\ttfamily C++}
+\def\cname{\ttfamily C}
+\def\phpname{\ttfamily PHP}
+\def\shname{\ttfamily bash}
+\def\matlabname{\ttfamily matlab}
+
+\definecolor{headerincludefile}{RGB}{197,187,129}
+\definecolor{headerkeyword}{RGB}{154,165,232}
+\definecolor{headergray}{RGB}{144,144,144}
+\definecolor{headerdirective}{RGB}{195,165,142}
+\definecolor{classnamecolor}{RGB}{35,165,138}
+\definecolor{paramidcolor}{RGB}{41,149,163}
+\def\lstimport{{\color{headerkeyword}import}\ }
+\def\lstusing{{\color{headerkeyword}using}\ }
+\def\lststruct{{\color{headerkeyword}struct}\ }
+\def\headeridentifier#1{{\color{headergray}#1}}
+\def\lstinclude{{\color{headerdirective}\#include}}
+\def\lstdefine{{\color{headerdirective}\#define}}
+\def\headerfile#1{{\color{headerincludefile}#1}}
+\def\cshusing#1{\lstusing \headeridentifier{#1}}
+\def\pyimport#1{\lstimport \headeridentifier{#1}}
+\let\javaimport\pyimport
+\def\cinclude#1{\lstinclude \headerfile{\ "#1"}}
+\def\cdefine#1#2{\lstdefine \headeridentifier{\ #1} #2}
+\def\cppinclude#1{\lstinclude \headerfile{<#1>}}
+\def\lstheaderend{{\color{headergray}\hdashrule[.8em]{\textwidth}{1pt}{4pt 2pt}\vspace{-1.3em}}}
+\def\lhend{\lstheaderend}
+\def\lstclass#1{{\color{classnamecolor}#1}}
+\def\pywith{{\color{blue}with}}
+\def\pyas{{\color{blue}as}}
+\def\sstr#1{{\color{stringred}'#1'}}
+\def\dstr#1{{\color{stringred}"#1"}}
+\def\jsrstr#1{{\color{stringred}#1}}
+\def\cshrstr#1{{\color{stringred}@"#1"}}
+\def\lstvar{{\color{blue}var}}
+\def\lsttrue{{\color{blue}true}}
+\def\lstfalse{{\color{blue}false}}
+\def\pynone{{\color{blue}None}}
+\def\codeconstrict{\vspace}
+\def\lstparam#1{{\color{paramidcolor}\$#1}}
+\def\nodeimport#1#2{{\color{headerkeyword}const} \headeridentifier{#1 = }{\color{headerkeyword}require}\headeridentifier{(}{\color{headerincludefile}'#2'}\headeridentifier{);}}
+
+\definecolor{commandbackground}{RGB}{0,0,72}
+\definecolor{commandtitle}{RGB}{255,255,255}
+
+\newenvironment{shcommand}[1]%
+{\tcolorbox[enhanced,
+      breakable,
+      arc=1mm,
+      top=0mm,
+      bottom=0mm,
+      left=2mm,
+      right=2mm,
+      boxrule=0pt,frame hidden,
+      colback=gray!20!white,
+      title={\color{commandtitle}\ttfamily #1},
+      attach boxed title to top center,
+      sharp corners,
+      boxed title style={boxrule=1mm, colframe=commandbackground, size=small,colback=commandbackground,top=1mm,bottom=1mm},
+      boxed title size=copy]}
+{\endtcolorbox}

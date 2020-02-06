@@ -1,0 +1,13 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{van-de-cyanide}
+
+\RequirePackage{chemmacros}
+\chemsetup{
+  formula = chemformula , % or mhchem
+  modules = thermodynamics
+}
+\newcommand{\stdst}[1]{#1^{\standardstate}}
+\newcommand{\moleV}{V_{\mathrm{m}}}
+\newcommand{\moleN}{N_{\mathrm{A}}}
+\newcommand{\molen}{n_{\mathrm{mole}}}
+\newcommand{\stname}[1]{{\mathrm{#1}}}

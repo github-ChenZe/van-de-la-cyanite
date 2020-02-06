@@ -1,0 +1,27 @@
+\renewenvironment{pitfall}
+{}{}
+
+\NewConfigure{pitfall}{2}
+
+\Configure{pitfall}
+{\ifvmode \IgnorePar\fi \EndP \HCode{<div class="pitfallBox">} \IgnorePar}
+{\ifvmode \IgnorePar\fi \EndP  \HCode{</div>}\HtmlParOn\par\ShowPar}
+
+\ConfigureEnv{pitfall}
+{\a:pitfall}
+{\b:pitfall}
+{}{}
+
+\renewenvironment{finale}
+{}{}
+
+\NewConfigure{finale}{2}
+
+\Configure{finale}
+{\ifvmode \IgnorePar\fi \EndP \HCode{<div class="finaleBox">} \IgnorePar}
+{\ifvmode \IgnorePar\fi \EndP  \HCode{</div>}\HtmlParOn\par\ShowPar}
+
+\ConfigureEnv{finale}
+{\a:finale}
+{\b:finale}
+{}{}

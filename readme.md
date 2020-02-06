@@ -1,0 +1,1 @@
+code in van-volatile.sty should be changed to fit your platform

@@ -1,0 +1,258 @@
+% Mathematics Include
+
+
+\hypersetup{%
+  colorlinks=false,% hyperlinks will be black
+  linkbordercolor=blue,% hyperlink borders will be red
+  pdfborderstyle={/S/U/W 1}% border style will be underline of width 1pt
+}
+
+\usepackage{wrapfig}
+\usepackage{leftidx}
+\usepackage{dashrule}
+\usepackage{ifthen}
+\usepackage{blindtext}
+
+
+\usepackage{xkeyval}
+\usepackage{forloop}
+
+% Physics Include
+
+
+
+\usepackage{mdframed}
+\usepackage{lipsum}% just to generate text for the example
+
+
+
+\usepackage{longtable}
+
+
+\newcommand{\positiontextbox}[4][]{%
+  \begin{tikzpicture}[remember picture,overlay]
+%    \draw[step=0.5,gray!80!white] (current page.north west) grid (current page.south east); % For controlling
+    \node[inner sep=10pt,right,line width=0pt,#1] at ($(current page.north west) + (#2,-#3)$) {#4};
+  \end{tikzpicture}%
+}
+
+\newmdenv[
+  topline=false,
+  bottomline=false,
+  skipabove=\topsep,
+  skipbelow=\topsep
+]{siderules}
+
+
+\newcommand{\bu}[3]{#1_{#2}^{\pare{#3}}}
+\newcommand{\axref}[1]{公理\ref{ax:#1}}
+\newcommand{\dref}[1]{定义\ref{def:#1}}
+\newcommand{\Dref}[1]{定义\ref{def:#1}{(#1)}}
+\newcommand{\aref}[1]{假设\ref{ass:#1}}
+\newcommand{\tref}[1]{定理\ref{thm:#1}}
+\newcommand{\Tref}[1]{定理\ref{thm:#1}(#1)}
+\newcommand{\lref}[1]{引理\ref{lem:#1}}
+\newcommand{\LMref}[1]{引理\ref{lem:#1}(#1)}
+\newcommand{\cref}[1]{推论\ref{coll:#1}}
+\newcommand{\Cref}[1]{推论\ref{coll:#1}(#1)}
+\newcommand{\pref}[1]{命题\ref{prp:#1}}
+\newcommand{\Pref}[1]{命题\ref{prp:#1}{(#1)}}
+\newcommand{\rmref}[1]{附注\ref{rm:#1}}
+\newcommand{\eref}[1]{例\ref{ex:#1}}
+\newcommand{\Eref}[1]{例\ref{ex:#1}{#1}}
+\newcommand{\reflref}[1]{反射\ref{reflex:#1}}
+\newcommand{\dcompare}[1]{\textit{平行于\dref{#1}}}
+\newcommand{\tcompare}[1]{\textit{平行于\tref{#1}}}
+\newcommand{\lcompare}[1]{\textit{平行于\lref{#1}}}
+\newcommand{\ecompare}[1]{\textit{平行于\eref{#1}}}
+\newcommand{\ccompare}[1]{\textit{平行于\cref{#1}}}
+\newcommand{\inter}[1]{\mathring{#1}}
+\newcommand{\forest}[3]{对于{#1}，存在{#2}，使得{#3}}
+\newcommand{\tuno}{$T_1$公理}
+
+
+\newcommand{\hd}{H\"{o}lder}
+
+\renewcommand{\proofname}{证明}
+\newcommand{\prop}{\propto}
+
+
+\newcommand{\refl}[1]{\vspace{0.5em}\par\noindent\fbox{%
+    \parbox{0.97\textwidth}{%
+    \begin{reflection}
+        #1
+    \end{reflection}
+    }%
+}\vspace{0.5em}\par}
+\newcommand{\rref}[1]{反射\ref{refl:#1}}
+\newcommand{\tbref}[1]{表\ref{table:#1}}
+\allowdisplaybreaks
+
+\newenvironment{aenum}{\begin{enumerate}[label=\textnormal{(\alph*)}]}{\end{enumerate}}
+\newcommand{\sus}[1]{\vspace{1em}\hrule\vspace{1em}{\color{red}#1}\vspace{1em}\hrule\vspace{1em}}
+\newcommand{\sep}{\par\noindent\hdashrule{\textwidth}{1pt}{1pt}}
+\newcommand{\offlegend}[1]{\tilde{P}_{#1}}
+
+\newcommand{\ceiling}[1]{\lceil #1 \rceil}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+
+
+
+% Physics Head
+
+\newcommand{\nbh}[1]{U\pare{#1}}
+\newcommand{\pnbh}[1]{\accentset{\circ}{U}\pare{#1}}
+\newcommand{\snbh}[2]{U_{#1}\pare{#2}}
+\newcommand{\psnbh}[2]{\accentset{\circ}{U}_{#1}\pare{#2}}
+%\newcommand{\mapsto}{\leadsto}
+\newcommand{\mie}{\mathrm{i.e.}}
+
+\newcommand{\proofpara}[1]{{\textit{#1}}}
+
+\usepackage{environ}
+
+\NewEnviron{erefl}{
+\begin{wrapfigure}{r}{.5\textwidth}
+\begin{tcolorbox}
+[width=.5\textwidth,standard jigsaw,colframe=red,
+opacityframe=0.5, opacitybacktitle=0.5,
+title filled, title=反射]
+\BODY
+\end{tcolorbox}
+\end{wrapfigure}
+}
+
+\newcommand{\fref}[1]{图\ref{fig:#1}}
+
+\newcommand{\patterntitle}[2]{\textbf{#1}（参见#2）}
+\newcommand{\patterncf}[1]{（参见#1）}
+
+
+\makeatletter
+
+\newtcbtheorem[number within=section]{patterntheorem}{反射}%
+{standard jigsaw,colframe=blue,opacityframe=0.5, opacitybacktitle=0.5, fonttitle=\bfseries}{pth}
+
+\newcounter{patterncount}
+\setcounter{patterncount}{0}
+
+\def\wrapbeginr{\wrapfigure{r}{.5\textwidth}}
+\def\wrapendr{\endwrapfigure}
+\def\wrapbeginno{}
+\def\wrapendno{}
+\def\wrapbegin{\wrapbeginno}
+\def\wrapend{\wrapendno}
+\def\patternlabelnameno{PATTERNLABEL\arabic{patterncount}}
+\def\patternlabel{\patternlabelnameno}
+
+\define@cmdkey{patternbox}[patternbox@]{starcount}[none]{}
+\define@cmdkey{patternbox}[patternbox@]{starcolor}[red]{}
+\define@cmdkey{patternbox}[patternbox@]{wrapbox}[no]{
+\def\wrapbegin{\csname wrapbegin#1\endcsname}
+\def\wrapend{\csname wrapend#1\endcsname}
+}
+\define@cmdkey{patternbox}[patternbox@]{label}[]{
+\def\patternlabel{#1}
+}
+\setkeys{patternbox}{starcount=0,starcolor=red,wrapbox=no,label=\patternlabelnameno}
+
+\newenvironment{spattern}[2][]
+{%
+\setkeys{patternbox}{#1}
+\stepcounter{patterncount}
+\wrapbegin
+\patterntheorem{#2}{\patternbox@label}
+%\tcolorbox
+%[standard jigsaw,colframe=blue,
+%opacityframe=0.5, opacitybacktitle=0.5,
+%title filled, title=反射 \arabic{patterncount} \drawnpatternstars{\patternbox@starcount}]
+%\patterntitle%
+\patterncf
+}
+{%\endtcolorbox
+\endpatterntheorem
+\wrapend}
+
+\newenvironment{cpattern}
+{
+\stepcounter{patterncount}
+\tcolorbox
+[width=\textwidth,standard jigsaw,colframe=blue,
+opacityframe=0.5, opacitybacktitle=0.5,
+title filled, title=反射 \arabic{patterncount}]\patterntitle}
+{\endtcolorbox}
+
+\newenvironment{pattern}[2]
+{
+\stepcounter{patterncount}
+\wrapfigure{#1}{#2}
+\tcbset{enhanced}
+\tcolorbox
+[width=#2,standard jigsaw,colframe=blue,
+opacityframe=0.5, opacitybacktitle=0.5,
+title filled, title=反射 \arabic{patterncount}]\patterntitle}
+{\endtcolorbox
+\endwrapfigure}
+
+\newcolumntype{W}{>{$\displaystyle }c<{$}}
+\newcolumntype{V}{>{$}c<{$}}
+
+\newcounter{patternstarcount}
+\newcommand{\drawpatternstar}{%
+\raisebox{0.25em}{%
+\psset{unit=1em}
+\pnode(0.25;90){N1}
+\pnode(0.25;162){N2}
+\pnode(0.25;234){N3}
+\pnode(0.25;306){N4}
+\pnode(0.25;18){N5}
+\pspolygon*[linecolor=\patternbox@starcolor](N3)(N1)(N4)(N2)(N5)%
+}%
+}
+\newcommand{\drawnpatternstars}[1]{
+\forloop{patternstarcount}{0}{\value{patternstarcount}<#1}{
+\drawpatternstar
+}
+}
+
+\newcommand{\pswall}{\psframe[linestyle=none,fillstyle=hlines]}
+
+\makeatother
+
+\newcommand{\refsys}[1]{舒'#1}
+\newcommand{\refyhw}[1]{杨'#1}
+
+%\newcommand{\erf}{\mathrm{erf}}
+\newcommand{\erfi}{\mathrm{erfi}}
+%\newcommand{\erfc}{\mathrm{erfc}}
+\newcommand{\ehxs}[1]{e^{-\frac{#1^2}{2}}}
+\newcommand{\dcol}[2]{\[ \left.#1 \hspace{1em}\right\vert\hspace{1em} #2 \]}
+\newcommand{\titlegamma}{\texorpdfstring{$\Gamma$}{Gamma}}
+\newcommand{\titleB}{\texorpdfstring{$B$}{B}}
+\newcommand{\switch}[2]{\brac{#1 | #2}}
+\newcommand{\SYSexeref}[1]{（舒幼生#1）}
+\newcommand{\GCexeref}[1]{（普化#1）}
+\newcommand{\Lref}[1]{（课堂例题#1）}
+\newcommand{\ptref}[1]{反射\ref{pth:#1}}
+\newcommand{\warning}[1]{\par\textit{注意：#1}}
+
+% Computer Science Head
+
+\lstset{language=Java}
+\newcommand{\snp}[1]{\lstinline!#1!}
+\newcommand{\term}[2]{\textbf{#1\ifthenelse{\equal{#2}{}}{}{（#2）}}}
+
+% Chemistry Head
+\newcommand{\hvap}{\Delta H_{\mathrm{vap}}}
+\newcommand{\cfsee}[1]{（c.f. #1）}
+
+
+%
+
+\newcommand{\subst}[2]{\left. #1 \right\vert_{#2}}
+
+\def\MARK{\positiontextbox{0.5em}{1em}{\textit{Tour de Force et Fancy}}}
+
+\newcommand\abeq[1]{\stackrel{\mathclap{\normalfont\mbox{#1}}}{=}}
+
+\usepackage{anyfontsize}

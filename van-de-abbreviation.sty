@@ -1,0 +1,44 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{van-de-abbreviation}
+
+\newcommand{\pare}[1]{\left(#1\right)}
+\newcommand{\blr}[1]{\left[#1\right)}
+\newcommand{\lbr}[1]{\left(#1\right]}
+\newcommand{\brac}[1]{\left[#1\right]}
+\newcommand{\curb}[1]{\left\{#1\right\}}
+\newcommand{\rec}[1]{\frac{1}{#1}}
+
+\newcommand{\dbar}{\mathrm{d}\hspace*{-0.15em}\bar{}\hspace*{0.18em}}
+\newcommand{\ubar}[1]{\text{\b{$#1$}}}
+
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\eddon}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+\newcommand{\ddelon}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\const}{\mathrm{const}}
+\newcommand{\parallelsum}{\mathbin{\!/\mkern-5mu/\!}}
+
+\newcommand{\rd}[1]{\mathrm{d} #1}
+\newcommand{\expc}[1]{\left\langle#1\right\rangle}
+\newcommand{\restr}[2]{#1|_{#2}}
+\newcommand{\divs}{|}
+\newcommand{\ndivs}{\nmid}
+\newcommand{\func}[3]{#1:\, #2 \rightarrow #3}
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+\newcommand{\clo}[1]{\overbar{#1}}
+\newcommand{\conj}[1]{\overbar{#1}}
+
+%\@ifpackageloaded{tex4ht}{%
+\def\rcurs{\mathfrak{r}}
+%}{%
+%\def\rcurs{{\mbox{$\resizebox{.09in}{.08in}{\includegraphics[trim= 1em 0 14em 0,clip]{/Users/zechen/Documents/PrivateAcademic/CommonHead/script_r/ScriptR.pdf}}$}}}
+%}
+
+%\@ifpackageloaded{tex4ht}{%
+\def\brcurs{\mathfrak{r}}
+%}{%
+%\def\brcurs{{\mbox{$\resizebox{.09in}{.08in}{\includegraphics[trim= 1em 0 14em 0,clip]{/Users/zechen/Documents/PrivateAcademic/CommonHead/script_r/BoldR.pdf}}$}}}
+%}
+\def\hrcurs{{\mbox{$\hat \brcurs$}}}
+
+\newcommand{\vcf}[1]{c.f. #1}
+\newcommand{\subst}[2]{\left. #1 \right\vert_{#2}}

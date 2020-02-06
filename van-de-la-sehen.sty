@@ -1,0 +1,287 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{van-de-la-sehen}
+
+% Extra acad\=em\=i\ae nihil.
+
+\RequirePackage{subfiles}
+\RequirePackage{amsmath}
+\RequirePackage{siunitx}
+\RequirePackage{esint}
+\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+\RequirePackage{amsfonts}
+\RequirePackage{mathrsfs}
+\RequirePackage{enumitem}
+\RequirePackage{braket}
+\RequirePackage[table]{xcolor}
+\RequirePackage[hidelinks]{hyperref}
+\RequirePackage{multirow}
+\RequirePackage{extarrows}
+\RequirePackage[version=4]{mhchem}
+\RequirePackage{array,booktabs}
+\@ifpackageloaded{tex4ht}{\newenvironment{longtable}{\begin{tabular}}{\end{tabular}}}{\RequirePackage{longtable}}
+\RequirePackage{mathtools}
+\RequirePackage[normalem]{ulem}
+\RequirePackage{multicol}
+\RequirePackage{chemfig}
+\RequirePackage{aliascnt}
+\RequirePackage[nameinlink,noabbrev]{cleveref}
+\@ifpackageloaded{tex4ht}{\newenvironment{subfigure}[2][]{\begin{figure}}{\end{figure}}}{\RequirePackage{subcaption}}
+\RequirePackage{paracol}
+\RequirePackage{mathrsfs}
+\RequirePackage{yfonts}
+\RequirePackage{calligra}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{lipsum}
+\RequirePackage[absolute]{textpos}
+\RequirePackage{titlesec}
+\RequirePackage{zhlipsum}
+\RequirePackage{titletoc}
+\RequirePackage{blindtext}
+\RequirePackage{shorttoc}
+\RequirePackage{setspace}
+\RequirePackage{everypage}
+\RequirePackage{marginnote}
+\RequirePackage{tocloft}
+\RequirePackage{calc}
+\RequirePackage{environ}
+\RequirePackage{anyfontsize}
+\RequirePackage{steinmetz}
+\let\aph\phase
+\let\phase\undefined
+\textblockorigin{-6mm}{3mm} 
+\RequirePackage{graphicx}
+\RequirePackage{pstricks}
+\RequirePackage{diagbox}
+\RequirePackage{dashrule}
+\RequirePackage{etoolbox}
+
+\RequirePackage{import}
+\RequirePackage{xifthen}
+\RequirePackage{pdfpages}
+%\RequirePackage{transparent}
+
+\RequirePackage{van-glossary}
+
+\newcommand{\srcpath}{./src/}
+\def\switchsrcpath#1{%
+\gdef\srcpath{#1/src/}
+}
+\newcommand{\incfig}[2]{\def\svgwidth{#1}\import{\srcpath}{#2.pdf_tex}}
+
+\RequirePackage[most]{tcolorbox}
+\tcbuselibrary{breakable}
+\tcbuselibrary{listings,theorems}
+\tcbuselibrary{xparse}
+\usetikzlibrary{decorations.text}
+
+\RequirePackage{physics}
+%\sisetup{inter-unit-product =$\cdot$}
+\sisetup{per-mode=symbol}
+\RequirePackage[makeroom]{cancel}
+\RequirePackage[all, pdf]{xy}
+
+\RequirePackage{listings}
+\RequirePackage{color}
+%\RequirePackage{eufrak}
+\RequirePackage{graphicx}
+
+\RequirePackage{wrapfig}
+%\RequirePackage{cutwin}
+\RequirePackage{titling}
+\RequirePackage{ifthen}
+
+\RequirePackage{van-de-omnibus}
+
+\let\oldnewtheorem\newtheorem
+\newcommand{\theoremnumbering}{section}
+\renewcommand{\newtheorem}[2]{\oldnewtheorem{#1}{#2}[\theoremnumbering]\expandafter\def\csname thmname@#1\endcsname{#2}}
+\DeclareOption{singleton}{\renewcommand{\theoremnumbering}{}\renewcommand{\newtheorem}[2]{\oldnewtheorem{#1}{#2}\expandafter\def\csname thmname@#1\endcsname{#2}}%
+\newcommand{\gradientLine}{\noindent%
+    \begin{tikzpicture}
+    \fill[black,path fading=east] (0,0) rectangle (\linewidth,-0.5pt);
+    \end{tikzpicture}%
+}
+\pretitle{% add some rules
+    \vspace{-2cm}
+    \noindent\Huge\bfseries
+}%, make the fonts bigger, make the title (only) bold
+\posttitle{%
+    \vspace{-1cm}
+}
+\renewcommand\maketitlehooka{%
+  %\noindent\vrule height 1pt width \textwidth
+  \gradientLine
+  \headingfont
+}
+\newcommand{\showtitle}[1]{\title{#1}\date{}\maketitle}
+
+\newlength\van@current@section@title@length
+
+\titleformat{\section}[block]
+{\headingfont\Large\flushleft}{\settowidth{\van@current@section@title@length}{\bfseries\Roman{section}\hspace{.3cm}}\hspace{-\van@current@section@title@length}{\bfseries\Roman{section}\hspace{.3cm}}}{.2em}{}
+
+\titleformat{\subsection}[block]
+{\headingfont\large\flushleft}{\settowidth{\van@current@section@title@length}{\bfseries\roman{subsection}.\hspace{.2cm}}\hspace{-\van@current@section@title@length}{\bfseries\roman{subsection}.\hspace{.2cm}}}{.2em}{}
+
+\titleformat{\subsubsection}[block]
+{\bfseries\flushleft}{\settowidth{\van@current@section@title@length}{\bfseries\arabic{subsubsection}.\hspace{.1cm}}\hspace{-\van@current@section@title@length}{\bfseries\arabic{subsubsection}.\hspace{.1cm}}}{.2em}{}
+
+\AtBeginDocument{\headerstamp}
+}
+
+\DeclareOption{margintoc}{
+\setcounter{tocdepth}{3}
+
+\renewcommand\cfttoctitlefont{\hfill\Large\bfseries}
+\renewcommand\cftaftertoctitle{\hfill\mbox{}}
+
+\cftsetindents{section}{0em}{2em}
+\cftsetindents{subsection}{0em}{2em}
+\cftsetindents{subsubsection}{0em}{2em}
+
+\newcommand{\cftsectiondotsep}{\cftnodots}
+\newcommand{\cftsubsectiondotsep}{\cftnodots}
+\newcommand{\cftsubsubsectiondotsep}{\cftnodots}
+\cftpagenumbersoff{section}
+\cftpagenumbersoff{subsection}
+\cftpagenumbersoff{subsubsection}
+
+\renewcommand{\@pnumwidth}{0em}
+
+\renewcommand{\contentsname}{}
+\setlength\cftbeforesecskip{0em}
+\renewcommand{\cftsecfont}{\small\bfseries}
+\renewcommand{\cftsecpresnum}{\csname van@nonsense}
+\renewcommand{\cftsecaftersnum}{\endcsname\noexpand}
+\renewcommand{\cftsecaftersnumb}{}
+\setlength\cftsecindent{.5cm}
+
+\setlength\cftbeforesubsecskip{-0.5em}
+
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsecpresnum}{\csname van@nonsense}
+\renewcommand{\cftsubsecaftersnum}{\endcsname\noexpand}
+\renewcommand{\cftsubsecaftersnumb}{}
+\setlength\cftsubsecindent{.6cm}
+
+\setlength\cftbeforesubsubsecskip{-0.5em}
+\renewcommand{\cftsubsubsecfont}{\scriptsize}
+\renewcommand{\cftsubsubsecpresnum}{\csname van@nonsense}
+\renewcommand{\cftsubsubsecaftersnum}{\endcsname\noexpand}
+\setlength\cftsubsubsecindent{.7cm}
+\renewcommand{\cftsubsubsecaftersnumb}{}
+
+\def\littletoc{
+\begin{textblock}{5}(.5,3)
+\tableofcontents
+\end{textblock}
+}
+
+\setlength{\marginparwidth}{5cm}
+
+\AddEverypageHook{\marginnote{\shorttoc{}{3}}}
+
+\reversemarginpar
+
+\AfterLastShipout{\parbox[0em,0em][0cm]{0cm}{\tableofcontents}}
+}
+
+\newcommand{\headerstamp}{%
+%\begin{tikzpicture}[remember picture, overlay]
+%\node[shift={(1.5cm,-1cm)}] at (current page.north west){\includegraphics[width=1.5cm]{/Users/zechen/Documents/PhantasiaAcademia/SehenPortrait.eps}};
+%\node[shift={(1.5cm,-2.0cm)}] at (current page.north west){\calligra{\small{Tour de}}};
+%\node[shift={(1.5cm,-2.45cm)}] at (current page.north west){\textgoth{Force et Fancy}};
+%\end{tikzpicture}
+\begin{textblock}{3}(0,.0)
+  \centerline{\includegraphics[width=1.5cm]{headerstamp/engine.jpg}}
+  \vspace{-0.8em}
+  \centerline{\calligra{\small{Tour de}}}
+  \vspace{-0.5em}
+  \centerline{\textgoth{Force et Fancy}}
+\end{textblock}
+}
+
+\DeclareOption{epu}{
+\renewcommand{\headerstamp}{%
+%\begin{tikzpicture}[remember picture, overlay]
+%\node[shift={(1.5cm,-1cm)}] at (current page.north west){\includegraphics[width=1.5cm]{/Users/zechen/Documents/PhantasiaAcademia/SehenPortrait.eps}};
+%\node[shift={(1.5cm,-2.0cm)}] at (current page.north west){\calligra{\small{Tour de}}};
+%\node[shift={(1.5cm,-2.45cm)}] at (current page.north west){\textgoth{Force et Fancy}};
+%\end{tikzpicture}
+\definecolor{epucolor}{RGB}{186,117,18}
+\begin{textblock}{3}(0,.0)
+  \centerline{\includegraphics[width=2cm]{headerstamp/EPluribusUnum.eps}}
+  \vspace{-1.1cm}\hspace{-0.32cm}
+{\textgoth{
+\begin{tikzpicture}
+\draw[-latex, white,postaction={decorate},decoration={text along path, text color=epucolor,
+text={E|\hspace{.5em}| ||Pluribus|\hspace{.5em}| ||Unum},text align=center}]
+(0,0) arc [start angle=-180,end angle=0,radius=1.35cm];
+\end{tikzpicture}
+}
+}
+\end{textblock}
+}
+}
+
+\DeclareOption{lux}{
+\renewcommand{\headerstamp}{%
+\begin{textblock}{3}(0,.0)
+  \vspace{.5cm}
+  \hspace{-.4cm}\reflectbox{\includegraphics[width=3cm,origin=c]{headerstamp/walllamp.png}}\vspace{-.5cm}\\
+  \mbox{}\hspace{.5cm}
+  \newfontfamily\luxheaderfont{Anarchaos}
+  {{\luxheaderfont\Huge \raisebox{.22cm}{\rotatebox{-15}{fiat}} \rotatebox{15}{lux}}}
+\end{textblock}
+}
+}
+
+\DeclareOption{nea}{
+\renewcommand{\headerstamp}{%
+\begin{textblock}{3}(0,.0)
+  \vspace{1cm}
+  \hspace{.4cm}{\includegraphics[width=2cm,origin=c]{headerstamp/ExtraAcademiaeNulla.eps}}\vspace{-.5cm}\\
+  \mbox{}\hspace{.5cm}
+\end{textblock}
+}
+}
+
+\def\van@deprecated#1{#1}
+
+\DeclareOption{nova}{
+\gdef\van@deprecated#1{}
+}
+
+\ProcessOptions\relax
+
+\van@deprecated{
+\RequirePackage{van-de-obsolescence}
+}
+
+\newcommand{\fcavity}{{\normalfont\the\thm@headfont\thm@indent\@ifempty {}{\let \thmnote \@gobble }{\let \thmnote \@iden }\thm@swap\swappedhead\thmhead{\csname thmname@\@currenvir\endcsname}{\csname the\@currenvir\endcsname}{}\the\thm@headpunct\thmheadnl\hskip\thm@headsep\ignorespaces}\ignorespaces}
+\newcommand{\makecavity}[4]{\leavevmode \InsertBoxR{#1}{\parbox{#2}{#3}}[1]\vspace*{-\baselineskip}
+\noindent\hphantom{\fcavity}#4\leavevmode
+}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=blue!70!black
+}
+\def\externallinksymbol{\raisebox{-.2\height}{\includegraphics[width=.9em]{img/externallink.eps}}}
+\let\oldhref\href
+\def\href{\externallinksymbol\oldhref}
+
+\RequirePackage{van-de-neko}
+\RequirePackage{van-de-environnement}
+\RequirePackage{van-de-abbreviation}
+\RequirePackage{boite/van-de-boite}
+\RequirePackage{van-de-physique}
+\RequirePackage{van-de-mathematiques}
+\RequirePackage{cyanide/van-de-cyanide}
+\RequirePackage{informatique/van-de-informatique}
+\RequirePackage{van-de-lingua}
+\RequirePackage{van-volatile}
+
+\input{insbox}

@@ -1,0 +1,77 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{van-de-neko}
+
+\def\van@current@tabline{}
+\def\van@addto#1#2{\expandafter\def\expandafter#1\expandafter{#1#2}}
+\def\van@qcommut#1{\van@qcommutA#1;|\van@current@tabline}
+\def\van@qcommutA#1|{%
+   %\if^#1^\else
+   %   \ifx\van@current@tabline\empty \else\van@addto\van@current@tabline{&}\fi
+   %   \van@addto\van@current@tabline{#1}\expandafter\van@qcommutA
+   %\fi
+    \ifthenelse{\equal{#1}{\string ;}}{}{%
+      \ifx\van@current@tabline\empty \else\van@addto\van@current@tabline{&}\fi
+      \van@addto\van@current@tabline{#1}\expandafter\van@qcommutA%
+    }%
+}
+
+%\newcounter{van@current@columncount}
+%\newcounter{van@current@columns@to@be@processed}
+
+\def\van@process@table#1{\begingroup\catcode`\^^M=12 \csname xmymacro#1\endcsname}
+{\catcode`\^^M=12 %
+ \expandafter\gdef\csname xmymacro[\endcsname^^M{\endgroup\begin{pmatrix}\van@process@table}%
+}
+{\catcode`\^^M=12 %
+ \expandafter\gdef\csname xmymacro|\endcsname#1^^M{\endgroup%
+ \newtableline%
+ \gdef\newtableline{\cr}\relax %
+ \van@process@row{#1}\van@process@table}%
+}
+{
+ \expandafter\gdef\csname xmymacro]\endcsname{\endgroup\end{pmatrix}}%
+}
+
+\def\van@process@row#1{\gdef\van@current@tabline{} \van@qcommut{#1}}
+
+\def\varray{\gdef\newtableline{}\van@process@table}
+
+% matrix input ends
+
+% font abbr
+
+\patchcmd{\lsthk@TextStyle}{\let\lst@DefEsc\@empty}{}{}{\errmessage{failed to patch}}
+
+% All other abbr to fonts are deprecated
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it} 
+\def\+#1{\csname van@mathfont@#1\endcsname}
+\def\van@mathfont@v{\boldsymbol}
+\def\van@mathfont@c{\ifthenelse{\equal{\f@family}{Consolas(0)}}{\lstclass}{\mathcal}}
+\def\van@mathfont@s{\mathscr}
+\def\van@mathfont@g{\mathfrak}
+\def\van@mathfont@b{\mathbb}
+\def\van@mathfont@p{\mathpzc}
+\def\van@mathfont@t{\tilde}
+\def\van@mathfont@m{\varray}
+\def\van@mathfont@u#1{\hat{\+v{#1}}}
+\expandafter\def\csname van@mathfont@`\endcsname #1'{{\ttfamily #1}}
+\expandafter\def\csname van@mathfont@_\endcsname #1_{_{\mathrm{#1}}}
+\expandafter\def\csname van@mathfont@-\endcsname #1{^{#1}}
+\expandafter\def\csname van@mathfont@2\endcsname {^2}
+\expandafter\def\csname van@mathfont@/\endcsname #1/#2/{\frac{#1}{#2}}
+\expandafter\def\csname van@mathfont@<\endcsname #1|#2>{\bra{#1}\ket{#2}}
+\expandafter\def\csname van@mathfont@>\endcsname #1<{\sqrt{#1}}
+\expandafter\def\csname van@mathfont@'\endcsname #1'{\rec{#1}}
+\expandafter\def\csname van@mathfont@!\endcsname #1!{\boxed{#1}}
+\expandafter\def\csname van@mathfont@d\endcsname #1#2{\csname van@math@derivative@#2\endcsname{#1}}
+\expandafter\def\csname van@math@derivative@d\endcsname #1#2{\eddon{#2}{#1}}
+\expandafter\def\csname van@math@derivative@.\endcsname #1{\eddon{}{#1}}
+\expandafter\def\csname van@mathfont@D\endcsname #1#2{\csname van@math@partial@derivative@#2\endcsname{#1}}
+\expandafter\def\csname van@math@partial@derivative@D\endcsname #1#2{\ddelon{#2}{#1}}
+\expandafter\def\csname van@math@partial@derivative@.\endcsname #1{\ddelon{}{#1}}
+
+\expandafter\def\csname van@mathfont@$\endcsname#1${$\displaystyle #1$}
+\expandafter\def\csname van@mathfont@:\endcsname#1{\csname van@multi@#1\endcsname}
+\def\van@multi@c#1#2#3{\multicolumn{#1}{#2}{#3}}
+\def\van@multi@r#1#2{\multirow{#1}{*}{#2}}
+\def\van@multi@m#1#2#3#4{\multicolumn{#2}{#3}{\multirow{#1}{*}{#4}}}

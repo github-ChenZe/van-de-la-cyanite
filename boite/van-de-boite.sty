@@ -1,0 +1,77 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{van-de-boite}
+
+\@ifpackageloaded{tex4ht}{%
+\newenvironment{pitfall}
+{}{}
+}{%
+\newenvironment{pitfall}
+{\begin{tcolorbox}
+[colframe=black, colframe=red, sharp corners, title filled, title=注意, opacitybacktitle=0.5]}
+{\end{tcolorbox}}
+}
+
+\@ifpackageloaded{tex4ht}{%
+\newenvironment{finale}[1][]
+{}{}
+}{%
+\newenvironment{finale}[1][]
+{\tcolorbox
+[#1 breakable, colframe=black, sharp corners]}
+{\endtcolorbox}
+}
+
+\@ifpackageloaded{tex4ht}{%
+\newenvironment{mtips}
+{}{}
+}{%
+\newenvironment{mtips}
+{\begin{tcolorbox}
+[breakable, standard jigsaw,colframe=green, opacityframe=0.5, opacitybacktitle=0.5]}
+{\end{tcolorbox}}
+}
+
+\@ifpackageloaded{tex4ht}{%
+\newenvironment{hardlink}
+{}{}
+}{%
+\newenvironment{hardlink}
+{\tcolorbox
+[breakable, hbox, standard jigsaw,colframe=orange, opacitybacktitle=0.5, colback=orange!50!white]\includegraphics[height=1em]{boite/img/PointerFingerNova.png}}
+{\endtcolorbox}
+}
+
+\@ifpackageloaded{tex4ht}{%
+\newcommand{\inlinehardlink}{}
+}{%
+\newtcbox{\inlinehardlink}{breakable, nobeforeafter, hbox, standard jigsaw,colframe=orange, opacitybacktitle=0.5, colback=orange!50!white, tcbox raise base, top=0mm,bottom=0mm,
+  right=0mm,left=0.15mm, boxsep=2pt, sidebyside align=center seam, before upper={\includegraphics[height=1em]{boite/img/PointerFingerNova.png}}}
+\robustify{\inlinehardlink}
+}
+
+\@ifpackageloaded{tex4ht}{%
+\newcommand{\inlinequestion}{}
+}{%
+\newtcbox{\inlinequestion}{breakable, nobeforeafter, hbox, standard jigsaw,colframe=orange, opacitybacktitle=0.5, colback=orange!50!white, tcbox raise base, top=0mm,bottom=0mm,
+  right=0mm,left=0.15mm, boxsep=2pt, sidebyside align=center seam}
+\robustify{\inlinequestion}
+}
+
+\@ifpackageloaded{tex4ht}{%
+\newenvironment{sample}
+{}{}
+}{%
+\newenvironment{sample}
+{\begin{tcolorbox}[breakable, enhanced,colback=yellow!10!white,boxrule=0pt,frame hidden,
+borderline west={2mm}{0pt}{yellow!80!orange}]}
+{\end{tcolorbox}}
+}
+
+\@ifpackageloaded{tex4ht}{
+\newenvironment{reflex}[2]
+{\HCode{<div class="reflexBox">}}
+{\HCode{</div>}}
+}{
+\newtcbtheorem[number within=section]{reflex}{反射}%
+{breakable, standard jigsaw,colframe=blue, opacityframe=0.5, opacitybacktitle=0.5}{reflex}
+}
